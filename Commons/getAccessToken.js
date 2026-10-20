@@ -16,6 +16,7 @@ export async function getImgurAccessToken() {
     request = new HttpRequestBuilder().setURL(BASE_URL).setPath(TOKEN_PATH).setMethod('POST').setField(form).setHeaders({ 'Content-Type': 'multipart/form-data' }).build();
     response = await getResponse(request);
     //write this access token to a text file called token.txt
+    fs.mkdirSync('token', { recursive: true });
     fs.writeFileSync('token/token.txt', response.body.access_token);
     return response.body.access_token;
 
